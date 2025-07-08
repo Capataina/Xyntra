@@ -1,10 +1,10 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-struct NodeID(u32);
+pub struct NodeID(u32);
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
-struct TensorShape(Vec<usize>);
+pub struct TensorShape(Vec<usize>);
 
-enum OpKind {
+pub enum OpKind {
     MatMul,
     Add,
     Gelu,
