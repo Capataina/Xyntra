@@ -37,6 +37,20 @@ pub enum ValidationError {
         expected: usize,
         found: usize,
     },
+    InvalidConfigValue {
+        field: String,
+        value: String,
+        reason: String,
+    },
+    InvalidFilePath {
+        path: String,
+        reason: String,
+    },
+    InvalidGPUParameter {
+        parameter: String,
+        value: usize,
+        valid_range: String,
+    },
 }
 
 #[derive(Debug)]
@@ -73,6 +87,7 @@ impl fmt::Display for ValidationError {
                     "Invalid tensor shape: expected {expected} but found {found}.",
                 )
             }
+
             ValidationError::IncompatibleShapes { op, shapes } => {
                 write!(
                     f,
@@ -81,12 +96,14 @@ impl fmt::Display for ValidationError {
                     shapes.join(", "),
                 )
             }
+
             ValidationError::InvalidNodeConnection { from, to, reason } => {
                 write!(
                     f,
                     "Invalid connection from node {from} to node {to}: {reason}.",
                 )
             }
+
             ValidationError::CyclicGraph { cycle_path } => {
                 write!(
                     f,
@@ -98,9 +115,11 @@ impl fmt::Display for ValidationError {
                         .join(", "),
                 )
             }
+
             ValidationError::MissingNode { node_id } => {
                 write!(f, "Referenced node {node_id} does not exist in the graph.",)
             }
+
             ValidationError::InvalidOpInputCount {
                 op,
                 expected,
@@ -109,6 +128,32 @@ impl fmt::Display for ValidationError {
                 write!(
                     f,
                     "Operation '{op}' expects {expected} inputs but received {found}."
+                )
+            }
+
+            ValidationError::InvalidConfigValue {
+                field,
+                value,
+                reason,
+            } => {
+                write!(
+                    f,
+                    "Invalid configuration value for '{field}': '{value}' is not valid because {reason}."
+                )
+            }
+
+            ValidationError::InvalidFilePath { path, reason } => {
+                write!(f, "Invalid file path '{path}': {reason}.")
+            }
+
+            ValidationError::InvalidGPUParameter {
+                parameter,
+                value,
+                valid_range,
+            } => {
+                write!(
+                    f,
+                    "Invalid GPU parameter '{parameter}': {value} is outside valid range {valid_range}."
                 )
             }
         }
