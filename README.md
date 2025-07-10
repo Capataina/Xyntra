@@ -10,20 +10,22 @@ The project explores graph rewriting, GPU occupancy modelling, and autotuned cod
 ## Technologies & Dependencies
 
 ### **🦀 Core Technologies**
-- **Rust 2024 Edition** – starting point; everything else will grow organically
+- **Rust 2024 Edition** – type-safe IR with comprehensive error handling
+- **Safe Rust only** – zero `unsafe` blocks in current implementation
 
-### **📦 External Dependencies**
-- _TBD_ – no external crates yet
+### **📦 Current Dependencies**
+- Standard library only – no external crates yet
+- Planned: `egg` (e-graphs), `wgpu` (GPU), `clap` (CLI)
 
 ---
 
 ## Features & Roadmap
 
 ### **🔧 Core Infrastructure & Foundations**
-- [ ] Type-safe primitives – `NodeId`, `TensorShape`, `OpKind`, `Graph`
-- [ ] Error-enum with recoverable vs fatal classes  
-- [ ] Config loader – CLI flags & `fusion.toml`
-- [ ] Modular crate layout – `xyntra-core`, `xyntra-cli`, `xyntra-ir`
+- [x] Type-safe primitives – `NodeId`, `TensorShape`, `OpKind`, `Graph` *in progress*
+- [x] Error-enum with recoverable vs fatal classes *in progress*
+- [ ] Config loader – CLI flags & `fusion.toml` *in progress*
+- [x] Modular crate layout – `xyntra-core`, `xyntra-cli`, `xyntra-ir` *in progress*
 
 ### **📡 Graph Ingestion & Export**
 - [ ] ONNX parser – load `.onnx` into internal IR  
@@ -52,9 +54,9 @@ The project explores graph rewriting, GPU occupancy modelling, and autotuned cod
 - [ ] Roofline model script – FLOP/s vs bandwidth chart _(stretch)_
 
 ### **🔒 Correctness & Validation**
-- [ ] Golden unit tests – compare fused vs unfused outputs  
+- [x] Golden unit tests – compare fused vs unfused outputs *in progress*
 - [ ] Gradient checks – optional back-prop correctness suite  
-- [ ] Edge-case library – broadcast, dynamic shapes, odd strides  
+- [x] Edge-case library – broadcast, dynamic shapes, odd strides *in progress*
 - [ ] Numerical tolerance config – FP32 / FP16 epsilon thresholds
 
 ### **📊 Observability & Diagnostics**
@@ -65,7 +67,7 @@ The project explores graph rewriting, GPU occupancy modelling, and autotuned cod
 ### **🛠️ Bench & Test Harness**
 - [ ] Micro-bench harness – single op-chain latency  
 - [ ] Model-zoo benchmarks – BERT, ResNet, ViT comparison  
-- [ ] Determinism suite – random seeds & output hashes  
+- [x] Determinism suite – random seeds & output hashes *in progress*
 - [ ] CI matrix – MSRV check, clippy, fmt, criterion
 
 ### **🧰 Developer eXperience (DX)**
